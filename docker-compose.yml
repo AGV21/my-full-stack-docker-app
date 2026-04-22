@@ -1,35 +1,59 @@
-services: 
+services:
 
-  frontend: 
+  nginx:
 
-    build: 
+    image: nginx:alpine
 
-      context: ./frontend 
+    container_name: nginx-container
 
-      dockerfile: Dockerfile 
+    ports:
 
-    container_name: frontend-container 
+      - "80:80"
 
-    ports: 
+    volumes:
 
-      - "8080:80" 
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
 
-    depends_on: 
+    # volumes:
 
-      - backend 
+    # - type: bind
 
- 
+    #   source: ./nginx/nginx.conf
 
-  backend: 
+    #   target: /etc/nginx/nginx.conf
 
-    build: 
+    depends_on:
 
-      context: ./backend 
+      - frontend
 
-      dockerfile: Dockerfile 
+      - backend
 
-    container_name: backend-container 
 
-    ports: 
 
-      - "3000:3000"
+  frontend:
+
+    build:
+
+      context: ./frontend
+
+      dockerfile: Dockerfile
+
+    container_name: frontend-container
+
+    # no ports: needed — nginx handles routing
+
+
+
+  backend:
+
+    build:
+
+      context: ./backend
+
+      dockerfile: Dockerfile
+
+    container_name: backend-container
+
+    # no ports: needed — nginx handles routing
+
+
