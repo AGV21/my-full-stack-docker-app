@@ -69,7 +69,7 @@ jobs:
         env:
           SHA: ${{ needs.build-and-push.outputs.sha_short }}
           DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
-        run:
+        run: |
           cd ~/deploy
           sed -i "s|YOUR_DOCKERHUB_USERNAME|$DOCKER_USER|g" docker-compose.yml
           sed -i "s|YOUR_SHA|$SHA|g" docker-compose.yml
