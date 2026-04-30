@@ -64,8 +64,8 @@ jobs:
   deploy:
     runs-on: self-hosted
     needs: build-and-push
-    outputs:
-      sha_short: ${{ steps.vars.outputs.sha_short }}
+   # outputs:
+    #  sha_short: ${{ steps.vars.outputs.sha_short }}
     steps:
       - name: Pull and redeploy
         env:
