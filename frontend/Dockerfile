@@ -10,7 +10,7 @@ WORKDIR /app
 
 COPY package*.json ./ 
 
-RUN npm ci --no-fund --no-audit 
+RUN npm install --no-fund --no-audit 
 
  
 
